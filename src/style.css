@@ -6,3 +6,8 @@ body {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
+
+.hello {
+  color: red;
+  background: url('./imgs/todoList.webp');
+}

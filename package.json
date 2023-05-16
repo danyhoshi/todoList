@@ -2,9 +2,10 @@
   "name": "todolist",
   "version": "1.0.0",
   "description": "Set up the project, the goal here is to master all of the tools and best practices of Linter, Gitflow and use HTML, CSS and JavaScript to create a todolist with WebPack.",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -12,19 +13,33 @@
   "license": "ISC",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "css-loader": "^6.7.3",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.27.5",
     "hint": "^7.1.8",
+    "html-webpack-plugin": "^5.5.1",
     "husky": "^8.0.3",
+    "style-loader": "^3.3.2",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-csstree-validator": "^1.9.0",
-    "stylelint-scss": "^3.21.0"
+    "stylelint-scss": "^3.21.0",
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1"
   },
-  "lint-staged":{
-    "*.(js)": ["eslint --fix"],
-    "*.(css|scss)": ["stylelint --fix"],
-    "*.(html)": ["hint"]
+  "lint-staged": {
+    "*.(js)": [
+      "eslint --fix"
+    ],
+    "*.(css|scss)": [
+      "stylelint --fix"
+    ],
+    "*.(html)": [
+      "hint"
+    ]
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
