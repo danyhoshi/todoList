@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -38,8 +39,5 @@
     "*.(html)": [
       "hint"
     ]
-  },
-  "dependencies": {
-    "lodash": "^4.17.21"
   }
 }
