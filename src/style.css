@@ -1,12 +1,126 @@
+:root {
+  --color-base-bg: #f6f6f6;
+  --color-text: #242423;
+  --color-clear: #393938;
+  --color-line: #cccccb;
+  --color-container: #fff;
+  --font-size: 1.1rem;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
+  font-size: var(--font-size);
   box-sizing: border-box;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  background-color: var(--color-base-bg);
+  color: var(--color-text);
 }
 
-.hello {
-  color: red;
+.in {
+  width: 100%;
+  font-style: italic;
+  font-size: var(--font-size);
+  color: var(--color-text);
+  background-color: var(--color-container);
+  border: 3px solid transparent;
+  height: 45px;
+  line-height: 15px;
+  padding: 0 40px 0 10px;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5);
+}
+
+.in:focus {
+  border-color: transparent;
+  outline: 0 none;
+}
+
+.in:-webkit-autofill,
+.in:-webkit-autofill:hover,
+.in:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-container);
+  border: 1px solid transparent;
+  caret-color: var(--color-text);
+}
+
+.checked {
+  text-decoration: line-through;
+}
+
+.container-svg {
+  width: 2rem;
+  height: 2rem;
+  padding-right: 1rem;
+  cursor: pointer;
+}
+
+.container-svg img {
+  width: 100%;
+}
+
+svg {
+  fill: var(--color-line);
+}
+
+label {
+  width: 80%;
+  padding-left: 0.5rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.containerTodo {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 80%;
+  min-height: 12rem;
+  max-width: 700px;
+  background-color: var(--color-container);
+  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.74);
+  -webkit-box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.74);
+  -moz-box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.74);
+}
+
+.containerTodo > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  border-bottom: solid 1px var(--color-line);
+}
+
+.containerTodo > .clearAll {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-clear);
+  height: 4rem;
+  border-bottom: solid 1px var(--color-line);
+}
+
+.containerTodo > div p {
+  padding: 0 1rem;
+}
+
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 90%;
+  padding: 0 1rem;
 }

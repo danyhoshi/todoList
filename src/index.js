@@ -1,19 +1,40 @@
+import Task from './task.js';
+import TodoList from './todoList.js';
 import './style.css';
-import Icon from './imgs/todoList.webp';
+import sinc from './imgs/sinc.svg';
+import moreVert from './imgs/more_vert.svg';
 
-function component() {
-  const element = document.createElement('div');
+const tdL = new TodoList();
+const input = document.querySelector('.in');
 
-  // Lodash, now imported by this script
-  // element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
-  element.textContent = 'Hello webpack';
-  // Add the image to our existing div.
-  const myIcon = new Image();
-  myIcon.src = Icon;
+const img = document.querySelectorAll('.container-svg img');
 
-  element.appendChild(myIcon);
-  return element;
-}
+img.forEach((element) => {
+  element.setAttribute('src', moreVert);
+});
 
-document.body.appendChild(component());
+document.querySelector('img[alt=reload]').setAttribute('src', sinc);
+
+document.addEventListener('change', (e) => {
+  const check = e.target;
+  if (e.target.type === 'checkbox') {
+    const tskD = document.querySelector(`label[for='${check.name}']`);
+    if (check.checked) {
+      tskD.classList.add('checked');
+      console.log(`Task selected: ${tskD.textContent}`);
+    } else {
+      tskD.classList.remove('checked');
+    }
+  }
+});
+
+input.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    const tsk = new Task(e.target.value); // default false
+    tdL.addTask(tsk);
+    const tareas = tdL.getTasks();
+    tareas.forEach((element, index) => {
+      console.log(element.description, element.state, index);
+    });
+  }
+});
