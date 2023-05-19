@@ -19,7 +19,7 @@ body {
   color: var(--color-text);
 }
 
-input[type="text"] {
+.in {
   width: 100%;
   font-style: italic;
   font-size: var(--font-size);
@@ -35,14 +35,14 @@ input[type="checkbox"] {
   transform: scale(1.5);
 }
 
-input[type="text"]:focus {
+.in:focus {
   border-color: transparent;
   outline: 0 none;
 }
 
-input[type="text"]:-webkit-autofill,
-input[type="text"]:-webkit-autofill:hover,
-input[type="text"]:-webkit-autofill:focus {
+.in:-webkit-autofill,
+.in:-webkit-autofill:hover,
+.in:-webkit-autofill:focus {
   -webkit-text-fill-color: var(--color-container);
   border: 1px solid transparent;
   caret-color: var(--color-text);

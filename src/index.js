@@ -5,31 +5,32 @@ import sinc from './imgs/sinc.svg';
 import moreVert from './imgs/more_vert.svg';
 
 const tdL = new TodoList();
-const label = document.querySelector('label');
-const checkbox = document.querySelector('input[type=checkbox]');
-const input = document.querySelector('input[type=text]');
-document.querySelector('img[alt=reload]').setAttribute('src', sinc);
-document.querySelector('img[alt=edit]').setAttribute('src', moreVert);
+const input = document.querySelector('.in');
 
-checkbox.addEventListener('change', (e) => {
+const img = document.querySelectorAll('.container-svg img');
+
+img.forEach((element) => {
+  element.setAttribute('src', moreVert);
+});
+
+document.querySelector('img[alt=reload]').setAttribute('src', sinc);
+
+document.addEventListener('change', (e) => {
   const check = e.target;
-  console.log(check.checked);
-  const tskD = document.querySelector(`label[for='${check.name}']`);
-  // console.log(tskD);
-  if (check.checked) {
-    label.classList.add('checked');
-    console.log(`Tarea seleccionada: ${tskD.textContent}`);
-  } else {
-    label.classList.remove('checked');
+  if (e.target.type === 'checkbox') {
+    const tskD = document.querySelector(`label[for='${check.name}']`);
+    if (check.checked) {
+      tskD.classList.add('checked');
+      console.log(`Task selected: ${tskD.textContent}`);
+    } else {
+      tskD.classList.remove('checked');
+    }
   }
 });
 
 input.addEventListener('keyup', (e) => {
-  // console.log(e.target.value);
   if (e.key === 'Enter') {
-    const tsk = new Task(e.target.value); // false por defecto
-    // console.log('desde tsk: ' + tsk.description);
-    // console.log(tsk.description, tsk.state);
+    const tsk = new Task(e.target.value); // default false
     tdL.addTask(tsk);
     const tareas = tdL.getTasks();
     tareas.forEach((element, index) => {
