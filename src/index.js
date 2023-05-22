@@ -3,6 +3,7 @@ import TodoList from './todoList.js';
 import './style.css';
 import sinc from './imgs/sinc.svg';
 import moreVert from './imgs/more_vert.svg';
+import trash from './imgs/delete.svg';
 
 const tdL = new TodoList();
 const input = document.querySelector('.in');
@@ -116,5 +117,24 @@ input.addEventListener('keyup', (e) => {
     });
     clearAll.insertAdjacentElement('beforebegin', printTask(tsk, tdL.getTasks().length - 1));
     input.value = '';
+  }
+});
+
+document.addEventListener('input', (e) => {
+  const taskEdit = e.target;
+  if (e.target.matches('.inTask')) {
+    const idTask = parseInt(taskEdit.name.slice(5), 10);
+    tdL.editTask(idTask, e.target.value);
+    localStorage.setItem('tasks', JSON.stringify(tdL.getTasks()));
+    taskEdit.parentElement.nextElementSibling.firstElementChild.setAttribute('alt', 'delete');
+    taskEdit.parentElement.nextElementSibling.firstElementChild.setAttribute('src', trash);
+  }
+});
+
+document.addEventListener('change', (e) => {
+  const taskEdit = e.target;
+  if (e.target.matches('.inTask')) {
+    taskEdit.parentElement.nextElementSibling.firstElementChild.setAttribute('alt', 'edit');
+    taskEdit.parentElement.nextElementSibling.firstElementChild.setAttribute('src', moreVert);
   }
 });

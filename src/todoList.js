@@ -14,6 +14,10 @@ export default class TodoList {
       this.tasks.splice(index, 1);
     }
 
+    editTask(index, nd) {
+      this.tasks[index].description = nd;
+    }
+
     getTasks() {
       return this.tasks;
     }
