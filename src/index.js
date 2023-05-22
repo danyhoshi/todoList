@@ -11,7 +11,7 @@ const img = document.querySelectorAll('.container-svg img');
 
 const clearAll = document.querySelector('.clearAll');
 
-function printTasks(element, index) {
+function printTask(element, index) {
   const div = document.createElement('div');
   const divC = document.createElement('div');
   const inputCheck = document.createElement('input');
@@ -24,7 +24,7 @@ function printTasks(element, index) {
   inputCheck.name = `task${index}`;
   inputCheck.checked = element.state;
   inputTask.value = element.description;
-  inputTask.setAttribute('name', `task${index}t`);
+  inputTask.setAttribute('name', `ttask${index}`);
   inputTask.classList.add('inTask');
   divSvg.classList.add('container-svg');
   svg.setAttribute('src', moreVert);
@@ -37,23 +37,50 @@ function printTasks(element, index) {
   return div;
 }
 
+function printTasks(tasks) {
+  tasks.forEach((element, index) => {
+    const div = document.createElement('div');
+    const divC = document.createElement('div');
+    const inputCheck = document.createElement('input');
+    const inputTask = document.createElement('input');
+    const divSvg = document.createElement('div');
+    const svg = document.createElement('img');
+    divC.classList.add('checkbox');
+    inputCheck.id = `task${index}`;
+    inputCheck.type = 'checkbox';
+    inputCheck.name = `task${index}`;
+    inputCheck.checked = element.state;
+    inputTask.value = element.description;
+    inputTask.setAttribute('name', `ttask${index}`);
+    inputTask.classList.add('inTask');
+    divSvg.classList.add('container-svg');
+    svg.setAttribute('src', moreVert);
+    svg.setAttribute('alt', 'edit');
+    divC.appendChild(inputCheck);
+    divC.appendChild(inputTask);
+    div.appendChild(divC);
+    divSvg.appendChild(svg);
+    div.appendChild(divSvg);
+    clearAll.insertAdjacentElement('beforebegin', div);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('tasks')) {
     tdL.tasks = JSON.parse(localStorage.getItem('tasks'));
     tdL.tasks.forEach((element, index) => {
       console.log(element.description, element.state, index);
-      clearAll.insertAdjacentElement('beforebegin', printTasks(element, index));
     });
+    printTasks(tdL.getTasks());
   } else {
-    // const tsk = new Task('Wash my dog...'); // false por defecto
     tdL.addTask(new Task('Wash my dog...'));
     tdL.addTask(new Task('Complete To Do List Project'));
     tdL.addTask(new Task('Fix car '));
-
     localStorage.setItem('tasks', JSON.stringify(tdL.getTasks()));
     console.log(localStorage.getItem('tasks'));
     console.log(`GetTask${tdL.getTasks().length}`);
-    clearAll.insertAdjacentElement('beforebegin', printTasks(tdL.getTasks(), tdL.getTasks().length));
+
+    printTasks(tdL.getTasks());
   }
 });
 
@@ -66,7 +93,7 @@ document.querySelector('img[alt=reload]').setAttribute('src', sinc);
 document.addEventListener('change', (e) => {
   const check = e.target;
   if (e.target.type === 'checkbox') {
-    const tskD = document.querySelector(`input[name='${check.name}t']`);
+    const tskD = document.querySelector(`input[name='t${check.name}']`);
     if (check.checked) {
       tskD.classList.add('checked');
       console.log(`Task selected: ${tskD.value}`);
@@ -81,8 +108,13 @@ input.addEventListener('keyup', (e) => {
     const tsk = new Task(e.target.value); // default false
     tdL.addTask(tsk);
     const tareas = tdL.getTasks();
+    localStorage.setItem('tasks', JSON.stringify(tdL.getTasks()));
+    console.log(localStorage.getItem('tasks'));
+    console.log(`GetTask${tdL.getTasks().length}`);
     tareas.forEach((element, index) => {
       console.log(element.description, element.state, index);
     });
+    clearAll.insertAdjacentElement('beforebegin', printTask(tsk, tdL.getTasks().length - 1));
+    input.value = '';
   }
 });
