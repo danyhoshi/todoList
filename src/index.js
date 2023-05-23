@@ -26,6 +26,9 @@ function printTask(element, index) {
   inputCheck.type = 'checkbox';
   inputCheck.name = `task${index}`;
   inputCheck.checked = element.state;
+  if (element.state) {
+    inputTask.classList.add('checked');
+  }
   inputTask.value = element.description;
   inputTask.setAttribute('name', `ttask${index}`);
   inputTask.classList.add('inTask');
@@ -53,8 +56,10 @@ function printTasks(tasks) {
     inputCheck.id = `task${index}`;
     inputCheck.type = 'checkbox';
     inputCheck.name = `task${index}`;
-    inputCheck.check = element.state;
     inputCheck.checked = element.state;
+    if (element.state) {
+      inputTask.classList.add('checked');
+    }
     inputTask.value = element.description;
     inputTask.setAttribute('name', `ttask${index}`);
     inputTask.classList.add('inTask');
@@ -84,8 +89,10 @@ function printTasksFrom(tasks, idR) {
       inputCheck.id = `task${index}`;
       inputCheck.type = 'checkbox';
       inputCheck.name = `task${index}`;
-      inputCheck.check = element.state;
       inputCheck.checked = element.state;
+      if (element.state) {
+        inputTask.classList.add('checked');
+      }
       inputTask.value = element.description;
       inputTask.setAttribute('name', `ttask${index}`);
       inputTask.classList.add('inTask');
@@ -98,7 +105,6 @@ function printTasksFrom(tasks, idR) {
       divSvg.appendChild(svg);
       div.appendChild(divSvg);
       clearAll.insertAdjacentElement('beforebegin', div);
-    // console.log('What are you doing?');
     }
   });
 }
@@ -152,6 +158,9 @@ document.addEventListener('change', (e) => {
       const idTask = parseInt(check.name.slice(4), 10);
       tdL.editStatus(idTask, check.checked);
       localStorage.setItem('tasks', JSON.stringify(tdL.getTasks()));
+      tdL.getTasks().forEach((ee, ii) => {
+        console.log(ee.description, ee.state, ii);
+      });
     } else {
       tskD.classList.remove('checked');
       const idTask = parseInt(check.name.slice(4), 10);
@@ -230,17 +239,6 @@ document.addEventListener('click', (e) => {
         }
       }
     });
-  } else {
-    return false;
-  }
-  return true;
-});
-
-document.addEventListener('change', (e) => {
-  const taskEdit = e.target;
-  if (e.target.matches('.inTask')) {
-    taskEdit.parentElement.nextElementSibling.firstElementChild.setAttribute('alt', 'edit');
-    taskEdit.parentElement.nextElementSibling.firstElementChild.setAttribute('src', moreVert);
   } else {
     return false;
   }
