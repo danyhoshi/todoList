@@ -1,4 +1,4 @@
-# Portfolio
+# ToDoList
 
 Set up the project, the goal here is to master all of the tools and best practices of Linter, Gitflow and use HTML, CSS and JavaScript to create a todolist with WebPack.
 
@@ -35,7 +35,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- The owner of the base design [@henridg](https://github.com/hendridg/hendridg). 
+- The owner of the base design [@hendridg](https://github.com/hendridg/hendridg). 
 - Our Studying group.
 
 ## 📝 License
