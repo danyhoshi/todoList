@@ -3,9 +3,9 @@ export default class Task {
 
     state;
 
-    constructor(description) {
+    constructor(description, stat) {
       this.description = description;
-      this.state = false;
+      this.state = stat;
     }
 
     setStatus(stat) {

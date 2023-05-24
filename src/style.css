@@ -4,6 +4,7 @@
   --color-clear: #393938;
   --color-line: #cccccb;
   --color-container: #fff;
+  --color-in: #fefcdc;
   --font-size: 1.1rem;
 }
 
@@ -12,11 +13,21 @@ body {
   margin: 0;
   padding: 0;
   font-size: var(--font-size);
-  box-sizing: border-box;
+
+  /* box-sizing: border-box; */
   scroll-behavior: smooth;
   overflow-x: hidden;
   background-color: var(--color-base-bg);
   color: var(--color-text);
+}
+
+button {
+  background-color: transparent;
+  color: var(--color-clear);
+  font-size: var(--font-size);
+  border: none;
+  width: 100%;
+  height: 4rem;
 }
 
 .in {
@@ -31,7 +42,43 @@ body {
   padding: 0 40px 0 10px;
 }
 
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.checkbox:focus {
+  background-color: var(--color-in);
+}
+
+.inTask {
+  width: 100%;
+  text-indent: 2.2rem;
+  font-family: serif;
+  font-size: var(--font-size);
+  color: var(--color-text);
+  background-color: var(--color-container);
+  border: none;
+  height: 45px;
+  line-height: 15px;
+  padding: 0;
+}
+
+.inTask:focus {
+  border-color: var(--color-in);
+  outline: 0 none;
+  background-color: var(--color-in);
+}
+
 input[type="checkbox"] {
+  position: absolute;
+  margin-left: 1rem;
   transform: scale(1.5);
 }
 
@@ -53,23 +100,15 @@ input[type="checkbox"] {
 }
 
 .container-svg {
+  position: absolute;
+  right: 1rem;
   width: 2rem;
   height: 2rem;
-  padding-right: 1rem;
   cursor: pointer;
 }
 
 .container-svg img {
   width: 100%;
-}
-
-svg {
-  fill: var(--color-line);
-}
-
-label {
-  width: 80%;
-  padding-left: 0.5rem;
 }
 
 .container {
@@ -94,12 +133,19 @@ label {
 }
 
 .containerTodo > div {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   height: 4rem;
+  padding: 0;
   border-bottom: solid 1px var(--color-line);
+}
+
+.containerTodo > div:focus {
+  background-color: var(--color-in);
 }
 
 .containerTodo > .clearAll {
@@ -114,13 +160,5 @@ label {
 
 .containerTodo > div p {
   padding: 0 1rem;
-}
-
-.checkbox {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 90%;
-  padding: 0 1rem;
+  font-size: var(--font-size);
 }
