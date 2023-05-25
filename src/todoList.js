@@ -1,31 +1,15 @@
-export default class TodoList {
-    tasks;
+export function addTask(tasks, task) {
+  tasks.push(task);
+}
 
-    constructor() {
-      this.tasks = [];
-    }
+export function removeTask(tasks, index) {
+  tasks.splice(index, 1);
+}
 
-    addTask(task) {
-      this.tasks.push(task);
-    }
+export function editTask(tasks, index, nd) {
+  tasks[index].description = nd;
+}
 
-    removeTask(index) {
-      this.tasks.splice(index, 1);
-    }
-
-    editTask(index, nd) {
-      this.tasks[index].description = nd;
-    }
-
-    editStatus(index, ns) {
-      this.tasks[index].state = ns;
-    }
-
-    getTasks() {
-      return this.tasks;
-    }
-
-  // removeTask(taskid) {
-
-  // }
+export function editStatus(tasks, index, ns) {
+  tasks[index].state = ns;
 }
