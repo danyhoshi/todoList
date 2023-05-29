@@ -4,7 +4,7 @@
   "description": "Set up the project, the goal here is to master all of the tools and best practices of Linter, Gitflow and use HTML, CSS and JavaScript to create a todolist with WebPack.",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "prepare": "husky install"
@@ -30,13 +30,13 @@
     "webpack-cli": "^5.1.1"
   },
   "lint-staged": {
-    "*.(js)": [
+    "./src/**/*.(js)": [
       "eslint --fix"
     ],
-    "*.(css|scss)": [
+    "./src/**/*.(css|scss)": [
       "stylelint --fix"
     ],
-    "*.(html)": [
+    "./src/**/*.(html)": [
       "hint"
     ]
   }
