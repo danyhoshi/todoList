@@ -1,6 +1,6 @@
 import moreVert from './imgs/more_vert.svg';
 
-const clearAll = document.querySelector('.clearAll');
+// const clearAll = document.querySelector('.clearAll');
 
 export function printTask(element, index) {
   const div = document.createElement('div');
@@ -34,6 +34,7 @@ export function printTask(element, index) {
 }
 
 export function printTasks(tasks) {
+  const clearAll = document.querySelector('.clearAll');
   tasks.forEach((element, index) => {
     const div = document.createElement('div');
     const divC = document.createElement('div');
@@ -67,6 +68,7 @@ export function printTasks(tasks) {
 }
 
 export function printTasksFrom(tasks, idR) {
+  const clearAll = document.querySelector('.clearAll');
   tasks.forEach((element, index) => {
     if (index >= idR) {
       const div = document.createElement('div');

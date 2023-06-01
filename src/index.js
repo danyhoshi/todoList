@@ -26,6 +26,7 @@ img.forEach((element, index) => {
 document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('tasks')) {
     tdL = JSON.parse(localStorage.getItem('tasks'));
+    // clearAll.insertAdjacentElement('beforebegin', printTasks(tdL)); ;
     printTasks(tdL);
   } else {
     tdL = [{
@@ -81,18 +82,18 @@ button.addEventListener('click', () => {
 
   localStorage.setItem('tasks', JSON.stringify(tdL));
   clearSelected();
+  // clearAll.insertAdjacentElement('beforebegin', printTasks(tdL)); ;
   printTasks(tdL);
 });
 
 input.addEventListener('keyup', (e) => {
   if (e.key === 'Enter') {
-    if (e.target.value) {
-      const tsk = { description: e.target.value, state: false };
-      addTask(tdL, tsk);
+    const tsk = { description: e.target.value, state: false };
+    if (addTask(tdL, tsk)) {
       localStorage.setItem('tasks', JSON.stringify(tdL));
       clearAll.insertAdjacentElement('beforebegin', printTask(tsk, tdL.length - 1));
-      input.value = '';
     }
+    input.value = '';
   }
 });
 

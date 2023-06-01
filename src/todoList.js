@@ -1,5 +1,8 @@
 export function addTask(tasks, task) {
-  tasks.push(task);
+  if (task.description) {
+    tasks.push(task);
+    return true;
+  } return false;
 }
 
 export function removeTask(tasks, index) {
