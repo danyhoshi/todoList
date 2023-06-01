@@ -1,19 +1,17 @@
 import './style.css';
-import {
-  addTask, removeTask, editTask, editStatus,
-} from './todoList.js';
-import { printTask, printTasks, printTasksFrom } from './print.js';
-import { clearSelected, clear } from './clears.js';
+import { editTask, editStatus } from './todoList.js';
+import add from './add.js';
+import { printTasks } from './print.js';
+import { clearSelected } from './clears.js';
 import sinc from './imgs/sinc.svg';
 import moreVert from './imgs/more_vert.svg';
 import trash from './imgs/delete.svg';
+import clearOne from './clear.js';
 
 let tdL = [];
 const input = document.querySelector('.in');
 
 const img = document.querySelectorAll('.container-svg img');
-
-const clearAll = document.querySelector('.clearAll');
 
 const button = document.querySelector('button');
 
@@ -65,17 +63,7 @@ document.addEventListener('change', (e) => {
   }
 });
 
-document.addEventListener('click', (e) => {
-  const taskR = e.target;
-  if (e.target.matches('img[alt=\'delete\']')) {
-    const tskD = taskR.parentElement.previousElementSibling.firstElementChild.id;
-    const idTask = parseInt(tskD.slice(4), 10);
-    removeTask(tdL, idTask);
-    localStorage.setItem('tasks', JSON.stringify(tdL));
-    clear(idTask);
-    printTasksFrom(tdL, idTask);
-  }
-});
+document.addEventListener('click', (event) => clearOne(event, tdL));
 
 button.addEventListener('click', () => {
   tdL = tdL.filter((task) => !task.state);
@@ -86,16 +74,7 @@ button.addEventListener('click', () => {
   printTasks(tdL);
 });
 
-input.addEventListener('keyup', (e) => {
-  if (e.key === 'Enter') {
-    const tsk = { description: e.target.value, state: false };
-    if (addTask(tdL, tsk)) {
-      localStorage.setItem('tasks', JSON.stringify(tdL));
-      clearAll.insertAdjacentElement('beforebegin', printTask(tsk, tdL.length - 1));
-    }
-    input.value = '';
-  }
-});
+input.addEventListener('keyup', (event) => add(event, tdL));
 
 document.addEventListener('input', (e) => {
   const taskEdit = e.target;

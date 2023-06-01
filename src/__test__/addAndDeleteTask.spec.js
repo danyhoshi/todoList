@@ -1,49 +1,38 @@
-import { addTask, removeTask } from '../todoList.js';
+import { addTask } from '../todoList.js';
+import add from '../add.js';
 import doc from './helper/index_mock.js';
 import tasksMock from './helper/tasks_mock.js';
-import { printTask, printTasks, printTasksFrom } from '../print.js';
-import { clear } from '../clears.js';
+import { printTasks } from '../print.js';
+import trash from '../imgs/delete.svg';
+import clearOne from '../clear.js';
 
 describe('Task suite Add and Delete Task', () => {
-  //   test('displays', () => {
-  //     // Set up our document body
-  //     document.body.innerHTML = "<div> </div>";
-
-  //       type();
-  //       const h1 = document.querySelector('h1');
-  //       expect(h1.textContent).toBe('Hey you');
-  // });
-
-  test('should be add one task to DOM, addTask method', () => {
+  test('Should be add one task to DOM, addTask method', () => {
     document.body.innerHTML = doc;
-    const clearAll = document.querySelector('.clearAll');
-    // const event = new KeyboardEvent('keydown', { key: 'Enter' });
-    // input.dispatchEvent(event);
+    const input = document.querySelector('.in');
     const tasks = [];
-    const task = {
-      description: 'Test 1',
-      state: false,
-    };
-    addTask(tasks, task);
-    clearAll.insertAdjacentElement('beforebegin', printTask(task, tasks.length - 1));
-    const inTsk = document.querySelector('.inTask');
-    expect(inTsk.value).toEqual(task.description);
+    input.value = 'First task';
+    input.addEventListener('keyup', (event) => add(event, tasks));
+    const event = new KeyboardEvent('keyup', { key: 'Enter' });
+    input.dispatchEvent(event);
+    const inTsk = document.querySelectorAll('.inTask').length;
+    expect(inTsk).toEqual(1);
   });
 
-  test('using addTask should be increases size of li array in DOM by 1, addTask method', () => {
+  test('Using addTask should be increases size of li array in DOM by 1', () => {
     document.body.innerHTML = doc;
-    const clearAll = document.querySelector('.clearAll');
-    // const event = new KeyboardEvent('keydown', { key: 'Enter' });
-    // input.dispatchEvent(event);
-    const tasks = [];
-    const task = {
-      description: 'Test 1',
-      state: false,
-    };
-    addTask(tasks, task);
-    clearAll.insertAdjacentElement('beforebegin', printTask(task, tasks.length - 1));
-    const inTsk = document.querySelectorAll('.inTask');
-    expect(inTsk.length).toBe(1);
+    const input = document.querySelector('.in');
+    const tasks = [...tasksMock];
+    printTasks(tasks);
+    const lengthBefore = document.querySelectorAll('.inTask').length;
+
+    input.value = 'One task more';
+    input.addEventListener('keyup', (event) => add(event, tasks));
+    const event = new KeyboardEvent('keyup', { key: 'Enter' });
+    input.dispatchEvent(event);
+
+    const lengthAfter = document.querySelectorAll('.inTask').length;
+    expect(lengthAfter).toBe(lengthBefore + 1);
   });
 
   test('Should be add an item, addTask method', () => {
@@ -56,31 +45,29 @@ describe('Task suite Add and Delete Task', () => {
     expect(tasks.length).toBe(1);
   });
 
-  test('should be delete one task to DOM, deleteTask method', () => {
+  test('Should be delete one task to DOM, deleteTask method', () => {
     document.body.innerHTML = doc;
     const tasks = [...tasksMock];
     printTasks(tasks);
     const lengthBefore = document.querySelectorAll('.inTask').length;
-    removeTask(tasks, 4);
-    clear(4);
-    printTasksFrom(tasks, 4);
+    const img = document.querySelectorAll('img');
+    img[1].src = trash;
+    img[1].alt = 'delete';
+    document.addEventListener('click', (event) => clearOne(event, tasks));
+    img[1].click();
     const lengthAfter = document.querySelectorAll('.inTask').length;
     expect(lengthAfter).toBe(lengthBefore - 1);
   });
 
   test('Empty description does not add anything to DOM', () => {
     document.body.innerHTML = doc;
-    const clearAll = document.querySelector('.clearAll');
+    const input = document.querySelector('.in');
     const tasks = [...tasksMock];
     printTasks(tasks);
     const lengthBefore = document.querySelectorAll('.inTask').length;
-    const tsk = {
-      description: '',
-      state: false,
-    };
-
-    if (addTask(tasks, tsk)) { clearAll.insertAdjacentElement('beforebegin', printTask(tsk, tasks.length - 1)); }
-
+    input.addEventListener('keyup', (event) => add(event, tasks));
+    const event = new KeyboardEvent('keyup', { key: 'Enter' });
+    input.dispatchEvent(event);
     const lengthAfter = document.querySelectorAll('.inTask').length;
     expect(lengthAfter).toBe(lengthBefore);
   });
